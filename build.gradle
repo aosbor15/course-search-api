@@ -28,7 +28,7 @@ test {
 
 jar {
     manifest {
-        attributes 'Main-Class' : 'ApiServer'
+        attributes 'Main-Class' : 'api.Server'
     }
     from {
         configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
