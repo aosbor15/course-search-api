@@ -1,9 +1,11 @@
+package model;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
 /**
- * Represent a Course.
+ * Represent a model.Course.
  */
 public class Course {
 
@@ -14,7 +16,7 @@ public class Course {
     private final String title;
 
     /**
-     * Construct a Course.
+     * Construct a model.Course.
      *
      * @param offeringName The course alphanumeric code.
      * @param title The course Title.

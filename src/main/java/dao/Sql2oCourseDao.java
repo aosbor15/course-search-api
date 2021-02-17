@@ -1,3 +1,7 @@
+package dao;
+
+import exceptions.DaoException;
+import model.Course;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
@@ -9,7 +13,7 @@ public class Sql2oCourseDao implements CourseDao {
     private final Sql2o sql2o;
 
     /**
-     * Construct Sql2oCourseDao.
+     * Construct dao.Sql2oCourseDao.
      *
      * @param sql2o A Sql2o object is injected as a dependency;
      *   it is assumed sql2o is connected to a database that  contains a table called

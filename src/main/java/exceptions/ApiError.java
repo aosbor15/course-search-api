@@ -1,3 +1,5 @@
+package exceptions;
+
 /**
  * A generic exception for API errors.
  */
@@ -5,7 +7,7 @@ public class ApiError extends RuntimeException {
     private final int status;
 
     /**
-     * Construct ApiError.
+     * Construct exceptions.ApiError.
      *
      * @param message Error message.
      * @param status API response code.

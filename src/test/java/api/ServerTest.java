@@ -1,8 +1,12 @@
+package api;
+
+import api.Server;
 import com.google.gson.Gson;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
+import model.Course;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,19 +17,19 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-class ApiServerTest {
+class ServerTest {
 
     private final static String BASE_URL = "http://localhost:4567";
     private static final Gson gson = new Gson();
 
     @BeforeAll
     static void runApiServer() throws URISyntaxException {
-        ApiServer.main(null); // run the server
+        Server.main(null); // run the server
     }
 
     @AfterAll
     static void stopApiServer() {
-        ApiServer.stop();
+        Server.stop();
     }
 
     @Test
@@ -75,7 +79,7 @@ class ApiServerTest {
 
     @Test
     public void postCourseWithIncompleteData() throws UnirestException {
-        Map<String, String> course = Map.of("title", "Made-up Course");
+        Map<String, String> course = Map.of("title", "Made-up model.Course");
         final String URL = BASE_URL + "/api/courses";
         HttpResponse<JsonNode> jsonResponse = Unirest.post(URL)
                 .body(gson.toJson(course)).asJson();

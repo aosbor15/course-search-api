@@ -1,7 +1,12 @@
+package dao;
+
+import model.Course;
+import exceptions.DaoException;
+
 import java.util.List;
 
 /**
- * Data Access Object for Course.
+ * Data Access Object for model.Course.
  */
 public interface CourseDao {
 

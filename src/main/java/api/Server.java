@@ -1,6 +1,13 @@
+package api;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import dao.CourseDao;
+import dao.Sql2oCourseDao;
+import exceptions.ApiError;
+import exceptions.DaoException;
+import model.Course;
 import org.sql2o.Sql2o;
 import spark.Spark;
 
@@ -11,7 +18,7 @@ import java.util.Map;
 
 import static spark.Spark.*;
 
-public class ApiServer {
+public class Server {
     public static void main(String[] args) throws URISyntaxException {
         port(getHerokuAssignedPort());
 
