@@ -164,5 +164,22 @@ class Sql2oCourseDaoTest {
         });
     }
 
+    @Test
+    @DisplayName("Deleting a course works")
+    void deleteWorks() {
+        courseDao.create("EN.000.999", "Delete This");
+        Course c1 = new Course ("EN.000.999", "Delete This");
+        assertEquals(c1, courseDao.read("EN.000.999"));
+        courseDao.delete("EN.000.999");
+        Course c2 = courseDao.read("EN.00.999");
+        assertNull(c2);
+    }
 
+    @Test
+    @DisplayName("Deleting an invalid course throws exception")
+    void deleteInvalidCourse() {
+        assertThrows(DaoException.class, () -> {
+            courseDao.delete("EN.000.999");
+        });
+    }
 }

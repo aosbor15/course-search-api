@@ -60,7 +60,11 @@ public class Sql2oCourseDao implements CourseDao {
 
     @Override
     public List<Course> readAll(String titleQuery) throws DaoException {
-        return null; // stub
+        try (Connection conn = sql2o.open()) {
+            return conn.createQuery("SELECT * FROM courses WHERE title LIKE '%" + titleQuery+"%';").executeAndFetch(Course.class);
+        } catch (Sql2oException ex) {
+            throw new DaoException("Unable to read courses from the database with given title", ex);
+        }
     }
 
     @Override
