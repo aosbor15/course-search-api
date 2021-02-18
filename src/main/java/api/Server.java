@@ -77,7 +77,7 @@ public class Server {
                 String offeringName = req.params("offeringName");
                 Course course = courseDao.read(offeringName);
                 if (course == null) {
-                    res.status(404);
+                    throw new ApiError("Resource not found", 404); // Bad request
                 }
                 res.type("application/json");
                 return gson.toJson(course);

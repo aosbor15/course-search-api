@@ -119,6 +119,31 @@ class ServerTest {
     public void putWorks() throws UnirestException{
         final String OFFERING_NAME = "EN.601.621";
         final String URL = BASE_URL + "/api/courses/" + OFFERING_NAME;
+        Course course = new Course("EN.601.621", "OOSE");
+        HttpResponse<JsonNode> jsonResponse = Unirest.put(URL)
+                .body(gson.toJson(course)).asJson();
+        assertEquals(200, jsonResponse.getStatus());
+        assertEquals(1, jsonResponse.getBody().getArray().length());
+    }
+
+    @Test
+    public void putCourseNotInDatabase() throws UnirestException {
+        final String OFFERING_NAME = "EN.000.999";
+        final String URL = BASE_URL + "/api/courses/" + OFFERING_NAME;
+        Course course = new Course("EN.000.999", "Made-up Course");
+        HttpResponse<JsonNode> jsonResponse = Unirest.put(URL)
+                .body(gson.toJson(course)).asJson();
+        assertEquals(404, jsonResponse.getStatus());
+    }
+
+    @Test
+    public void putIncorrectOfferingName() throws UnirestException {
+        final String OFFERING_NAME = "EN.601.421";
+        final String URL = BASE_URL + "/api/courses/" + OFFERING_NAME;
+        Course course = new Course("EN.601.226", "Data Structures");
+        HttpResponse<JsonNode> jsonResponse = Unirest.put(URL)
+                .body(gson.toJson(course)).asJson();
+        assertEquals(400, jsonResponse.getStatus());
     }
 }
 
