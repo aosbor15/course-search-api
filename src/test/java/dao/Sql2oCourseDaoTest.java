@@ -176,10 +176,10 @@ class Sql2oCourseDaoTest {
     }
 
     @Test
-    @DisplayName("Deleting an invalid course throws exception")
+    @DisplayName("Deleting an invalid course returns null")
     void deleteInvalidCourse() {
-        assertThrows(DaoException.class, () -> {
-            courseDao.delete("EN.000.999");
-        });
+        Course c1 = courseDao.read("EN.000.999");
+        assertNull(c1);
+        assertNull(courseDao.delete("EN.000.999"));
     }
 }

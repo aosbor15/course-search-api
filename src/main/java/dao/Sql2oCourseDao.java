@@ -6,6 +6,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sql2oCourseDao implements CourseDao {
@@ -60,11 +61,17 @@ public class Sql2oCourseDao implements CourseDao {
 
     @Override
     public List<Course> readAll(String titleQuery) throws DaoException {
-        try (Connection conn = sql2o.open()) {
-            return conn.createQuery("SELECT * FROM courses WHERE title LIKE '%" + titleQuery+"%';").executeAndFetch(Course.class);
-        } catch (Sql2oException ex) {
-            throw new DaoException("Unable to read courses from the database with given title", ex);
+        titleQuery = titleQuery.toUpperCase();
+        List<Course> courses = readAll();
+        List<Course> toReturn = new ArrayList<>();
+        for (Course c : courses) {
+            if (c.getTitle().toUpperCase().contains(titleQuery)) {
+                toReturn.add(c);
+            }
         }
+        System.out.println(courses.toString());
+        System.out.println(toReturn.toString());
+        return toReturn;
     }
 
     @Override

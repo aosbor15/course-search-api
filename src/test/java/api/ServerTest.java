@@ -114,5 +114,11 @@ class ServerTest {
         HttpResponse<JsonNode> jsonResponse = Unirest.delete(URL).asJson();
         assertEquals(404, jsonResponse.getStatus());
     }
+
+    @Test
+    public void putWorks() throws UnirestException{
+        final String OFFERING_NAME = "EN.601.621";
+        final String URL = BASE_URL + "/api/courses/" + OFFERING_NAME;
+    }
 }
 

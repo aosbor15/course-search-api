@@ -73,8 +73,18 @@ public class Server {
             }
         });
         delete("/api/courses/:offeringName", (req, res) -> {
-            // TODO Implement me!
-            return null;
+            try {
+                String offeringName = req.params("offeringName");
+                Course course = courseDao.read(offeringName);
+                if (course == null) {
+                    res.status(404);
+                }
+                res.type("application/json");
+                return gson.toJson(course);
+            }
+            catch (DaoException ex) {
+                throw new ApiError(ex.getMessage(), 500);
+            }
         });
         put("/api/courses/:offeringName", (req, res) -> {
             try {
